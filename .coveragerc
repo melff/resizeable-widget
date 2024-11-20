@@ -1,0 +1,2 @@
+[run]
+omit = resizeable_widget/tests/*

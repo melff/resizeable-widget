@@ -1,0 +1,5 @@
+{
+  "load_extensions": {
+    "resizeable_widget/extension": true
+  }
+}
