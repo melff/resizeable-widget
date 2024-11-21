@@ -9,7 +9,7 @@ TODO: Add module docstring
 """
 
 from ipywidgets import DOMWidget
-from traitlets import Unicode, CFloat
+from traitlets import Unicode, CFloat, CBool
 from ._frontend import module_name, module_version
 
 
@@ -24,4 +24,6 @@ class Resizeable(DOMWidget):
     _view_module_version = Unicode(module_version).tag(sync=True)
     width = CFloat(-1, help = "Width").tag(sync = True)
     height = CFloat(-1, help = "height").tag(sync = True)
-    value = Unicode("<em>Hi there, it's me!</em>").tag(sync = True)
+    value = Unicode("<em>Hello World!</em>").tag(sync = True)
+    debug = CBool(False).tag(sync = True)
+

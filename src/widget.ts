@@ -25,6 +25,7 @@ export class ResizeableModel extends DOMWidgetModel {
       width: -1,
       height: -1,
       value: 'High there!',
+      debug: false,
     };
   }
 
@@ -43,13 +44,16 @@ export class ResizeableModel extends DOMWidgetModel {
   width: number;
   height: number;
   value: string;
+  debug: boolean;
 }
 
 export class ResizeableView extends DOMWidgetView {
   render() {
     this._innerdiv = document.createElement('div');
     this.el.classList.add('resizer');
-    this.el.classList.add('ugly');
+    if (this.model.get('debug')) {
+      this.el.classList.add('debug-resizer');
+    }
     this._innerdiv.classList.add('resized');
     this._innerdiv.innerHTML = this.model.get('value');
     this.el.appendChild(this._innerdiv);
@@ -61,10 +65,18 @@ export class ResizeableView extends DOMWidgetView {
     });
     this.rob.observe(this.el);
     this.model.on('change:value', this._onValueChanged, this);
+    this.model.on('change:debug', this._onDebugChanged, this);
   }
   private _innerdiv: HTMLDivElement;
   private rob: any;
   private _onValueChanged() {
     this._innerdiv.innerHTML = this.model.get('value');
+  }
+  private _onDebugChanged() {
+    if (this.model.get('debug')) {
+      this.el.classList.add('debug-resizer');
+    } else {
+      this.el.classList.remove('debug-resizer');
+    }
   }
 }
