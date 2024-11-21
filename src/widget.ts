@@ -22,6 +22,9 @@ export class ResizeableModel extends DOMWidgetModel {
       _view_name: ResizeableModel.view_name,
       _view_module: ResizeableModel.view_module,
       _view_module_version: ResizeableModel.view_module_version,
+      width: -1,
+      height: -1,
+      value: 'High there!',
     };
   }
 
@@ -36,20 +39,32 @@ export class ResizeableModel extends DOMWidgetModel {
   static view_name = 'ResizeableView'; // Set to null if no view
   static view_module = MODULE_NAME; // Set to null if no view
   static view_module_version = MODULE_VERSION;
+
+  width: number;
+  height: number;
+  value: string;
 }
 
 export class ResizeableView extends DOMWidgetView {
   render() {
-    this._outerdiv = document.createElement('div');
     this._innerdiv = document.createElement('div');
-    this._outerdiv.classList.add('resizer');
+    this.el.classList.add('resizer');
+    this.el.classList.add('ugly');
     this._innerdiv.classList.add('resized');
-    this._outerdiv.classList.add('ugly');
-    this._innerdiv.textContent = 'Hello World!';
-    this._outerdiv.appendChild(this._innerdiv);
-    this.el.appendChild(this._outerdiv);
+    this._innerdiv.innerHTML = this.model.get('value');
+    this.el.appendChild(this._innerdiv);
+    this.rob = new ResizeObserver((entries) => {
+      const rect = entries[0].contentRect;
+      this.model.set('width', rect.width);
+      this.model.set('height', rect.height);
+      this.model.save_changes();
+    });
+    this.rob.observe(this.el);
+    this.model.on('change:value', this._onValueChanged, this);
   }
-
-  private _outerdiv: HTMLDivElement;
   private _innerdiv: HTMLDivElement;
+  private rob: any;
+  private _onValueChanged() {
+    this._innerdiv.innerHTML = this.model.get('value');
+  }
 }
