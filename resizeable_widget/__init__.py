@@ -4,7 +4,7 @@
 # Copyright (c) Martin Elff.
 # Distributed under the terms of the Modified BSD License.
 
-from .widget import Resizeable
+from .widget import Resizeable, HResizeable, VResizeable
 from ._version import __version__, version_info
 
 def _jupyter_labextension_paths():

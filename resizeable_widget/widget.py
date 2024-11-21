@@ -27,3 +27,16 @@ class Resizeable(DOMWidget):
     value = Unicode("<em>Hello World!</em>").tag(sync = True)
     debug = CBool(False).tag(sync = True)
 
+
+class VResizeable(Resizeable):
+    """TODO: Add docstring here
+    """
+    _model_name = Unicode('VResizeableModel').tag(sync=True)
+    _view_name = Unicode('VResizeableView').tag(sync=True)
+
+class HResizeable(Resizeable):
+    """TODO: Add docstring here
+    """
+    _model_name = Unicode('HResizeableModel').tag(sync=True)
+    _view_name = Unicode('HResizeableView').tag(sync=True)
+

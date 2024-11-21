@@ -50,7 +50,6 @@ export class ResizeableModel extends DOMWidgetModel {
 export class ResizeableView extends DOMWidgetView {
   render() {
     this._innerdiv = document.createElement('div');
-    this.el.classList.add('resizer');
     if (this.model.get('debug')) {
       this.el.classList.add('debug-resizer');
     }
@@ -66,6 +65,7 @@ export class ResizeableView extends DOMWidgetView {
     this.rob.observe(this.el);
     this.model.on('change:value', this._onValueChanged, this);
     this.model.on('change:debug', this._onDebugChanged, this);
+    this.el.classList.add('resizer');
   }
   private _innerdiv: HTMLDivElement;
   private rob: any;
@@ -78,5 +78,47 @@ export class ResizeableView extends DOMWidgetView {
     } else {
       this.el.classList.remove('debug-resizer');
     }
+  }
+}
+
+export class VResizeableModel extends ResizeableModel {
+  defaults() {
+    return {
+      ...super.defaults(),
+      _model_name: VResizeableModel.model_name,
+      _model_module: VResizeableModel.model_module,
+      _model_module_version: VResizeableModel.model_module_version,
+      _view_name: VResizeableModel.view_name,
+      _view_module: VResizeableModel.view_module,
+      _view_module_version: VResizeableModel.view_module_version,
+    };
+  }
+}
+
+export class VResizeableView extends ResizeableView {
+  render() {
+    super.render();
+    this.el.classList.add('vresizer');
+  }
+}
+
+export class HResizeableModel extends ResizeableModel {
+  defaults() {
+    return {
+      ...super.defaults(),
+      _model_name: HResizeableModel.model_name,
+      _model_module: HResizeableModel.model_module,
+      _model_module_version: HResizeableModel.model_module_version,
+      _view_name: HResizeableModel.view_name,
+      _view_module: HResizeableModel.view_module,
+      _view_module_version: HResizeableModel.view_module_version,
+    };
+  }
+}
+
+export class HResizeableView extends ResizeableView {
+  render() {
+    super.render();
+    this.el.classList.add('hresizer');
   }
 }
