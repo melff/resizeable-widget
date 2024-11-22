@@ -57,18 +57,29 @@ export class ResizeableView extends DOMWidgetView {
     this._innerdiv.innerHTML = this.model.get('value');
     this.el.appendChild(this._innerdiv);
     this.rob = new ResizeObserver((entries) => {
-      const rect = entries[0].contentRect;
-      this.model.set('width', rect.width);
-      this.model.set('height', rect.height);
+      // const rect = entries[0].contentRect;
+      const width = this.el.scrollWidth;
+      const height = this.el.scrollHeight;
+      this.model.set('width', width);
+      this.model.set('height', height);
       this.model.save_changes();
     });
     this.rob.observe(this.el);
     this.model.on('change:value', this._onValueChanged, this);
     this.model.on('change:debug', this._onDebugChanged, this);
     this.el.classList.add('resizer');
+    this.el.style.width = '576px';
+    this.update_dims();
   }
   private _innerdiv: HTMLDivElement;
   private rob: any;
+  private update_dims() {
+    const width = this.el.scrollWidth;
+    const height = this.el.scrollHeight;
+    this.model.set('width', width);
+    this.model.set('height', height);
+    this.model.save_changes();
+  }
   private _onValueChanged() {
     this._innerdiv.innerHTML = this.model.get('value');
   }
