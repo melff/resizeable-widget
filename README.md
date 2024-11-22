@@ -1,7 +1,7 @@
 
 # resizeable-widget
 
-[![codecov](https://codecov.io/gh/melff/resizeable-widget/branch/master/graph/badge.svg)](https://codecov.io/gh/-/resizeable-widget)
+<!-- [![codecov](https://codecov.io/gh/melff/resizeable-widget/branch/master/graph/badge.svg)](https://codecov.io/gh/-/resizeable-widget) -->
 
 
 A resizeable widget for Jupyter
