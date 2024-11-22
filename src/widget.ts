@@ -57,9 +57,8 @@ export class ResizeableView extends DOMWidgetView {
     this._innerdiv.innerHTML = this.model.get('value');
     this.el.appendChild(this._innerdiv);
     this.rob = new ResizeObserver((entries) => {
-      // const rect = entries[0].contentRect;
-      const width = this.el.scrollWidth;
-      const height = this.el.scrollHeight;
+      const width = parseInt(this.el.style.width);
+      const height = parseInt(this.el.style.height);
       this.model.set('width', width);
       this.model.set('height', height);
       this.model.save_changes();
@@ -67,15 +66,16 @@ export class ResizeableView extends DOMWidgetView {
     this.rob.observe(this.el);
     this.model.on('change:value', this._onValueChanged, this);
     this.model.on('change:debug', this._onDebugChanged, this);
+    this.model.on('change:width', this._onSizeChanged, this);
+    this.model.on('change:height', this._onSizeChanged, this);
     this.el.classList.add('resizer');
-    this.el.style.width = '576px';
     this.update_dims();
   }
   private _innerdiv: HTMLDivElement;
   private rob: any;
   private update_dims() {
-    const width = this.el.scrollWidth;
-    const height = this.el.scrollHeight;
+    const width = parseInt(this.el.style.width);
+    const height = parseInt(this.el.style.height);
     this.model.set('width', width);
     this.model.set('height', height);
     this.model.save_changes();
@@ -88,6 +88,16 @@ export class ResizeableView extends DOMWidgetView {
       this.el.classList.add('debug-resizer');
     } else {
       this.el.classList.remove('debug-resizer');
+    }
+  }
+  private _onSizeChanged() {
+    const width = this.model.get('width');
+    const height = this.model.get('height');
+    if (width > 0) {
+      this.el.style.width = `${width}px`;
+    }
+    if (height > 0) {
+      this.el.style.height = `${height}px`;
     }
   }
 }

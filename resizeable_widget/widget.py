@@ -23,7 +23,7 @@ class Resizeable(DOMWidget):
     _view_module = Unicode(module_name).tag(sync=True)
     _view_module_version = Unicode(module_version).tag(sync=True)
     width = CInt(-1, help = "Width").tag(sync = True)
-    height = CInt(-1, help = "height").tag(sync = True)
+    height = CInt(-1, help = "Height").tag(sync = True)
     value = Unicode("<em>Hello World!</em>").tag(sync = True)
     debug = CBool(False).tag(sync = True)
 
