@@ -26,7 +26,7 @@
   "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/-/resizeable-widget"
+    "url": "https://github.com/melff/resizeable-widget"
   },
   "scripts": {
     "build": "jlpm run build:lib && jlpm run build:nbextension && jlpm run build:labextension:dev",
