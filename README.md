@@ -8,10 +8,16 @@ A resizeable widget for Jupyter
 
 ## Installation
 
-You can install using `pip`:
+As soon as the package is on Pypi, you can install using `pip`:
 
 ```bash
 pip install resizeable_widget
+```
+
+For the time being at least this works:
+
+```bash
+pip install git+https://github.com/melff/resizeable-widget.git
 ```
 
 If you are using Jupyter Notebook 5.2 or earlier, you may also need to enable
